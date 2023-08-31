@@ -8,6 +8,7 @@ function App() {
     const [origin, setOrigin] = useState('');
     const [destination, setDestination] = useState('');
     const [departureDate, setDepartureDate] = useState('');
+    const [noOfAdults, setNoOfAdults] = useState('');
 
 
     async function fetchData(url, options) {
@@ -43,7 +44,7 @@ function App() {
             retToDiffCity: false,
             oneForCity: null,
             onePerDate: null,
-            adults: 2,
+            adults: noOfAdults,
             children: null,
             infants: null,
             selectedCabins: "M",
@@ -130,6 +131,12 @@ function App() {
                 type="date"
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
+            />
+            <input
+                type="text"
+                placeholder="No. of adults"
+                value={noOfAdults}
+                onChange={(e) => setNoOfAdults(e.target.value)}
             />
             <div className="flight-list">
                 {flights.map((flight) => (
