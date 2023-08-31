@@ -1,0 +1,80 @@
+/* App.css */
+
+/* Define primary and secondary colors */
+:root {
+  --primary-color: #2bab4e; /* Coral */
+  --secondary-color: #74b9ff; /* Sky Blue */
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.App {
+  text-align: center;
+  padding: 40px;
+}
+
+h1 {
+  font-size: 2rem;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.flight-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.flight-item {
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.flight-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.flight-details {
+  margin-top: 10px;
+}
+
+.flight-details p {
+  margin: 5px 0;
+}
+
+.flight-details strong {
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button-container button {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.button-container button:hover {
+  background-color: #2980b9;
+}
+
+.flight-item a {
+  text-decoration: none; /* Remove underline from links within flight items */
+  color: inherit; /* Inherit the color from the parent element */
+}
