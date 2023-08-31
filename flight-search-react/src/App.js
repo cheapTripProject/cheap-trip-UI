@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import './App.css';
+import FlightItem from './component/FlightItem.js'; // Import the new component
+
 
 function App() {
     const [flights, setFlights] = useState([]);
@@ -29,18 +31,60 @@ function App() {
 
         const requestBody = {
             flyFrom: origin,
-            selectedCabins: 'M',
-            curr: 'RON',
-            sort: 'price',
+            flyTo: null,
             dateFrom: departureDate,
             dateTo: departureDate,
-            retFromDiffCity: false,
-            nightsInDstTo: 3,
+            returnFrom: "2023-12-03",
+            returnTo: "2023-12-03",
             nightsInDstFrom: 0,
+            nightsInDstTo: 3,
+            maxFlyDuration: null,
+            retFromDiffCity: false,
+            retToDiffCity: false,
+            oneForCity: null,
+            onePerDate: null,
             adults: 2,
-            returnFrom: '2023-12-03',
-            returnTo: '2023-12-03',
-            maxStopOvers: 0
+            children: null,
+            infants: null,
+            selectedCabins: "M",
+            mixWithCabins: null,
+            adultHoldBag: null,
+            adultHandBag: null,
+            childHoldBag: null,
+            childHandBag: null,
+            flyDays: null,
+            flyDaysType: null,
+            retFlyDaysType: null,
+            onlyWorkingDays: false,
+            onlyWeekends: false,
+            partnerMarket: null,
+            curr: "RON",
+            locale: null,
+            priceFrom: null,
+            priceTo: null,
+            dtimeFrom: null,
+            dtimeTo: null,
+            atimeFrom: null,
+            atimeTo: null,
+            retDtimeFrom: null,
+            retDtimeTo: null,
+            retAtimeFrom: null,
+            retAtimeTo: null,
+            stopOverFrom: null,
+            stopOverTo: null,
+            maxStopOvers: 0,
+            maxSectorStopOvers: null,
+            connOnDiffAirport: null,
+            retFromDiffAirport: null,
+            retToDiffAirport: null,
+            selectAirlines: null,
+            selectAirlinesExcluded: false,
+            selectStopAirport: null,
+            selectStopAirportExclude: false,
+            vehicleType: null,
+            enableVi: false,
+            sort: "price",
+            limit: null
         };
 
         const requestOptions = {
@@ -89,22 +133,7 @@ function App() {
             />
             <div className="flight-list">
                 {flights.map((flight) => (
-                    <div key={flight.id} className="flight-item">
-                        <a
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            href={flight.deep_link}
-                        >
-                            <h3>Flight Details</h3>
-                            <div className="flight-details">
-                                <p><strong>Origin:</strong> {flight.cityFrom}</p>
-                                <p><strong>Destination:</strong> {flight.cityTo}</p>
-                                <p><strong>Departure Date:</strong> {flight.local_departure}</p>
-                                <p><strong>Price:</strong> {flight.price} {flight.currency}</p>
-                                {/* You can display other flight details here */}
-                            </div>
-                        </a>
-                    </div>
+                    <FlightItem key={flight.id} flight={flight} />
                 ))}
             </div>
         </div>
