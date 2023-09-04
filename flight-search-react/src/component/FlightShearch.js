@@ -1,6 +1,6 @@
 import React from 'react';
 
-function FlightItem({ flight }) {
+function FlightShearch({ flight }) {
     return (
         <div className="flight-item">
             <a target="_blank" rel="noopener noreferrer" href={flight.deep_link}>
@@ -17,4 +17,4 @@ function FlightItem({ flight }) {
     );
 }
 
-export default FlightItem;
+export default FlightShearch;

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
-import FlightItem from './component/FlightItem.js';
+import FlightShearch from './component/FlightShearch.js';
 
 function App() {
     // State variables
@@ -14,7 +14,7 @@ function App() {
     const origins = [
         "Baia Mare Airport (BAY)",
         "Bacau Airport (BCM)",
-        "Bucharest Airports (OTP/BBU)",
+        "Bucharest Airports (OTP)",
         "Constanta Airport (CND)",
         "Craiova Airport (CRA)",
         "Iasi Airport (IAS)",
@@ -28,6 +28,14 @@ function App() {
         "Targu Mureș Airport (TGM)",
         /* Add more origins as needed */
     ];
+    const originMap = {};
+
+    origins.forEach(origin => {
+        const parts = origin.match(/^(.*?)\s+\((.*?)\)$/);
+        if (parts && parts.length === 3) {
+            originMap[origin] = parts[2].trim();
+        }
+    });
 
     // Function to fetch data from the API
     async function fetchData(url, options) {
@@ -54,7 +62,58 @@ function App() {
             flyFrom: origin,
             flyTo: null,
             dateFrom: departureDate,
-            // ... (rest of your request body)
+            dateTo: departureDate,
+            returnFrom: null,
+            returnTo: null,
+            nightsInDstFrom: 0,
+            nightsInDstTo: 3,
+            maxFlyDuration: null,
+            retFromDiffCity: false,
+            retToDiffCity: false,
+            oneForCity: null,
+            onePerDate: null,
+            adults: noOfAdults,
+            children: null,
+            infants: null,
+            selectedCabins: "M",
+            mixWithCabins: null,
+            adultHoldBag: null,
+            adultHandBag: null,
+            childHoldBag: null,
+            childHandBag: null,
+            flyDays: null,
+            flyDaysType: null,
+            retFlyDaysType: null,
+            onlyWorkingDays: false,
+            onlyWeekends: false,
+            partnerMarket: null,
+            curr: "RON",
+            locale: null,
+            priceFrom: null,
+            priceTo: null,
+            dtimeFrom: null,
+            dtimeTo: null,
+            atimeFrom: null,
+            atimeTo: null,
+            retDtimeFrom: null,
+            retDtimeTo: null,
+            retAtimeFrom: null,
+            retAtimeTo: null,
+            stopOverFrom: null,
+            stopOverTo: null,
+            maxStopOvers: 0,
+            maxSectorStopOvers: null,
+            connOnDiffAirport: null,
+            retFromDiffAirport: null,
+            retToDiffAirport: null,
+            selectAirlines: null,
+            selectAirlinesExcluded: false,
+            selectStopAirport: null,
+            selectStopAirportExclude: false,
+            vehicleType: null,
+            enableVi: false,
+            sort: "price",
+            limit: null
         };
 
         const requestOptions = {
@@ -111,7 +170,7 @@ function App() {
             const suggestionElement = document.createElement("div");
             suggestionElement.textContent = suggestion;
             suggestionElement.addEventListener("click", () => {
-                setOrigin(suggestion); // Update the state
+                setOrigin(originMap[suggestion]); // Update the state
                 dropdownContent.style.display = "none"; // Close the dropdown
             });
             dropdownContent.appendChild(suggestionElement);
@@ -193,7 +252,7 @@ function App() {
             />
             <div className="flight-list">
                 {flights.map((flight) => (
-                    <FlightItem key={flight.id} flight={flight} />
+                    <FlightShearch key={flight.id} flight={flight} />
                 ))}
             </div>
         </div>
