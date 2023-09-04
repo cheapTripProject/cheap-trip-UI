@@ -13,7 +13,7 @@ function App() {
     // List of available origins
     const origins = [
         "Baia Mare Airport (BAY)",
-        "Bacău Airport (BCM)",
+        "Bacau Airport (BCM)",
         "Bucharest Airports (OTP/BBU)",
         "Constanta Airport (CND)",
         "Craiova Airport (CRA)",
@@ -25,7 +25,7 @@ function App() {
         "Tulcea Airport (TCE)",
         "Timisoara Airport (TSR)",
         "Cluj-Napoca Airport (CLJ)",
-        "Târgu Mureș Airport (TGM)",
+        "Targu Mureș Airport (TGM)",
         /* Add more origins as needed */
     ];
 
@@ -96,13 +96,14 @@ function App() {
 
     // Function to render origin suggestions
     function renderOriginSuggestions(suggestions) {
-        const originAutocomplete = document.getElementById("originAutocomplete");
-        if (!originAutocomplete) return;
+        const originDropdown = document.getElementById("originDropdown");
+        if (!originDropdown) return;
 
-        originAutocomplete.innerHTML = "";
+        const dropdownContent = originDropdown.querySelector(".dropdown-content");
+        dropdownContent.innerHTML = "";
 
         if (suggestions.length === 0) {
-            originAutocomplete.style.display = "none";
+            dropdownContent.style.display = "none";
             return;
         }
 
@@ -111,14 +112,23 @@ function App() {
             suggestionElement.textContent = suggestion;
             suggestionElement.addEventListener("click", () => {
                 setOrigin(suggestion); // Update the state
-                originAutocomplete.innerHTML = ""; // Clear the autocomplete suggestions
+                dropdownContent.style.display = "none"; // Close the dropdown
             });
-            originAutocomplete.appendChild(suggestionElement);
+            dropdownContent.appendChild(suggestionElement);
         });
 
-        originAutocomplete.style.display = "block";
+        dropdownContent.style.display = "block";
     }
 
+// Close the autocomplete dropdown when clicking outside of it
+    document.addEventListener("click", (event) => {
+        const originDropdown = document.getElementById("originDropdown");
+
+        if (originDropdown && !originDropdown.contains(event.target)) {
+            const dropdownContent = originDropdown.querySelector(".dropdown-content");
+            dropdownContent.style.display = "none";
+        }
+    });
     // Close the autocomplete dropdown when clicking outside of it
     useEffect(() => {
         const handleOutsideClick = (event) => {
@@ -154,6 +164,11 @@ function App() {
                 onChange={(e) => handleOriginInput(e.target.value)}
             />
             <div id="originAutocomplete" className="autocomplete"></div>
+
+            <div className="dropdown" id="originDropdown">
+                <div className="dropdown-content" id="originAutocomplete">
+                </div>
+            </div>
 
             <select
                 value={destination}
